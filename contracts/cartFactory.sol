@@ -1,14 +1,11 @@
-// SPDX-License-Identifier: MIT
 pragma solidity >=0.8.2 <0.9.0;
 
 contract CartFactory {
-  
+
   struct Order {
     string status;
     bool complete;
-    // array of strings from inventory app(dutchie) for item lookups.  api can concatinate 'item:price'
-    // ex: ['wanaPineapple:20.00', 'ozoneKD:35.55']
-    string[] items;
+    uint[] items;
     uint256 total;
     address customer;
     address storeWallet;
@@ -21,18 +18,19 @@ contract CartFactory {
   uint public orderCount;
 
 
-  function addOrder(string memory _status, bool _complete, uint[] memory _items, uint256 _total, address _customer, address _storeWallet, address _budtender) public {
+  function addOrder(string memory _status, bool _complete, uint[] memory _items, uint256 _total, address _customer, address _storeWallet, address _budTender) public {
     Order memory newOrder = Order(_status, _complete, _items, _total, _customer, _storeWallet, _budtender);
 
     // add new order to mapping
     orders[orderCount] = newOrder;
 
     orderCount++;
-    }
+
+  }
 
   function getOrder(uint _orderid) public view returns (string memory,bool, uint[] memory, uint256, address, address, address) {
-    Order memory order = orders[_orderid];
+    Order memory order = orders[_orderId];
 
-    return (order.status, order.complete, order.items, order.total, order.customer, order.storeWallet, order.budTender);
+    return (order.status, order.complete, order.items, order.total, order.customer, order,storeWallet, order.budTender);
   }
 }
