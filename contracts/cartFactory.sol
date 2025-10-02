@@ -4,8 +4,9 @@ contract CartFactory {
 
   struct Order {
     string status;
-    bool complete;
-    uint[] items;
+    //idk if status is needed in this contract but status list: unconfirmed, confirmed, filled, fufilled(pickedup)
+    bool complete; // this param and status could be used to attack contract? 
+    uint[] items; // unit for now pull items as stored in leafly, dutchie, aero APIS etc.. item codes. need to look at dutchi api and others.
     uint256 total;
     address customer;
     address storeWallet;
@@ -19,7 +20,7 @@ contract CartFactory {
 
 
   function addOrder(string memory _status, bool _complete, uint[] memory _items, uint256 _total, address _customer, address _storeWallet, address _budTender) public {
-    Order memory newOrder = Order(_status, _complete, _items, _total, _customer, _storeWallet, _budtender);
+    Order memory newOrder = Order(_status, _complete, _items, _total, _customer, _storeWallet, _budTender);
 
     // add new order to mapping
     orders[orderCount] = newOrder;
@@ -29,8 +30,8 @@ contract CartFactory {
   }
 
   function getOrder(uint _orderid) public view returns (string memory,bool, uint[] memory, uint256, address, address, address) {
-    Order memory order = orders[_orderId];
+    Order memory order = orders[_orderid];
 
-    return (order.status, order.complete, order.items, order.total, order.customer, order,storeWallet, order.budTender);
+    return (order.status, order.complete, order.items, order.total, order.customer, order.storeWallet, order.budTender);
   }
 }
