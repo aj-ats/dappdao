@@ -10,7 +10,6 @@ contract CartFactory {
     uint256 total;
     address customer; // customer will be the one signing the contracts/ creating the order. will i need ? idk but will learn
     address storeWallet;
-    address budTender;
   }
 
   // store orders
