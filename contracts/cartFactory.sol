@@ -8,7 +8,7 @@ contract CartFactory {
     bool complete; // this param and status could be used to attack contract? 
     uint[] items; // unit for now pull items as stored in leafly, dutchie, aero APIS etc.. item codes. need to look at dutchi api and others.
     uint256 total;
-    address customer;
+    address customer; // customer will be the one signing the contracts/ creating the order. will i need ? idk but will learn
     address storeWallet;
     address budTender;
   }
