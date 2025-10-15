@@ -3,11 +3,16 @@ import express, { NextFunctions, Request, Response } from "npm:express@4.18.2";
 import fs from 'node:fs';
 //config logging to your liking... api authored by aj for now 
 const log_file: string = '../app.log';
-const logStream = fs.createWriteStream('/home/andowens/.bc/backend/app.log', { flags: 'a' });
+const logStream = fs.createWriteStream('/home/andowens/.bc/dappdao/backend/app.log', { flags: 'a' });
 // server is used to run the server. Listening on the hosts port running on 3k
 const app = express()
+const indexPath: string = '/home/andowens/.bc/dappdao/backend/src/public/index.html'
 const port = Number(Deno.env.get("PORT")) || 3000;
 let hcItteration: number = 1;
+// entrypoint
+app.get('/', (req, res) => {
+  res.redirect('/about')
+});
 // healthcheck endpoint 
 app.get('/hc', (req, res) => {
 
@@ -26,11 +31,16 @@ app.get('/about', (req, res) => {
     req.ip; // fallback
     logStream.write(`${new Date().toISOString()} [LOG]: ${ip} hit about page \n`)
     //server file
-    res.sendFile(`/home/andowens/.bc/backend/src/public/index.html`);
+    res.sendFile(indexPath);
   } catch (e) {
     logStream.write(`${new Date().toISOString()} [ERROR]: \n${e}\n`)
   }
 });
+// endpoint for working with each contract. handle diffrent methods acordingly
+app.route('/createOrder' (req, res) => {
+  // 
+});
+
 
 // what does the application need to do
 // endpoint to gen private keys 
